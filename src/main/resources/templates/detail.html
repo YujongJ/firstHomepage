@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <style>
+    table, tr, td, th {
+        border: 2px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 10px;
+    }
+
+  </style>
+  <meta charset="UTF-8">
+  <title>detail</title>
+  <link href="/css/style.css" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nanum+Brush+Script&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nanum+Brush+Script&family=Noto+Sans+KR:wght@100..900&family=Oswald:wght@200..700&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+</head>
+
+
+
+
+
+
+<body>
+
+
+
+<div class = frame>
+
+  <nav class="navigator">
+    <h3 class="site-name">KINGDOM OF YUJONG</h3>
+    <ul>
+      <li><a class="nav-menu" href="/">HOME</a></li>
+      <li><a class="nav-menu" href="/info">INFO</a></li>
+      <li><a class="nav-menu" href="/work">WORK</a></li>
+      <li><a class="nav-menu" href="/index">BOARD</a></li>
+    </ul>
+  </nav>
+
+  <h2 class="gle">게시글</h2>
+
+
+
+
+  <table class="detail">
+    <tr>
+    <td colspan="5" class="titleCell" th:text="${board.boardTitle}"></td>
+    </tr>
+
+
+    <tr class = "allCell">
+    <th class = "wrtCell">작성자</th>
+    <td class = "writerCell" th:text="${board.boardWriter}"></td>
+    <td class = "createCell" th:text="${board.createdAt}"></td>
+    <th class = "hCell">조회수</th>
+    <td class = "hitsCell" th:text="${board.boardHits}"></td>
+  </tr>
+
+
+
+    <tr>
+    <td colspan="5" class = "contentCell" th:text="${board.boardContents}"></td>
+    </tr>
+
+
+
+    <tr th:if="${board.fileAttached == 1}">
+    <th>사진</th>
+    <td th:each="boardFile: ${boardFileList}">
+      <img th:src="@{|/upload/${boardFile.storedFileName}|}" alt="" width="200" height="200">
+    </td>
+  </tr>
+</table>
+
+
+
+  <div class="btn">
+  <button  onclick="listReq()">목록</button>
+  <button  onclick="updateReq()">수정</button>
+  <button onclick="deleteReq()">삭제</button>
+  </div>
+
+
+  <footer class="footer">
+    <h3 class="contact"> CONTACT ME</h3>
+    <div class="links">
+      <a class="insta" href="https://www.instagram.com/general_yu_j95/profilecard/?igsh=MTBpaW4yOHFsYW12dg=="> INSTAGRAM </a>
+      <a class="facebook" href="https://www.facebook.com/people/%EC%A0%95%EC%9C%A0%EC%A2%85/pfbid0bNtbmwQipabYKS497vjAk627VNU9zXbwwBqhACBhw6zwHtSNwMvkwTGdbHoAfmRDl/"> FACEBOOK </a>
+    </div>
+  </footer>
+
+
+  </div>
+
+
+</body>
+
+
+
+
+
+<script th:inline="javascript">
+  const listReq = () => {
+      location.href = "/index";
+  }
+  const updateReq = () => {
+      location.href = `/update/[[${board.id}]]`;
+  }
+  const deleteReq = () => {
+      location.href = `/delete/[[${board.id}]]`;
+  }
+</script>
+</html>
