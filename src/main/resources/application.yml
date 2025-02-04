@@ -1,14 +1,21 @@
 # server port
 server:
   port: 8080
+  address: 0.0.0.0
 
 # database
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/new_schema?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://host.docker.internal:3306/new_schema
     username: root
     password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
 
 
 

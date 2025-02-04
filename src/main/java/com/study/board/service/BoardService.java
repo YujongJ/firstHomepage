@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -70,9 +71,10 @@ public class BoardService {
         // 1. 게시글 삭제
         boardRepository.delete(id);
 
-        // 2. 번호 재정렬
-        boardRepository.reorderDisplayOrder();
+
+
     }
+
 
     public List<BoardFileDTO> findFile(Long id) {
         return boardRepository.findFile(id);

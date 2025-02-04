@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -36,12 +36,14 @@
 
     <h2 class="saveGle">글작성</h2>
 
-    <form  class="saveForm" action="/save" method="post" enctype="multipart/form-data">
-     <input class="saveTitle" type="text" placeholder="제목"  style=" background: transparent;"  name="boardTitle"><br>
-     <input  class="saveName" type="text" placeholder="닉네임" style=" background: transparent;" name="boardWriter">
-    <input class="savePass"  type="text" placeholder="비밀번호" style=" background: transparent;" name="boardPass"><br>
+    <p class="badText">욕설이나 문제가 될만한 글,사진은 관리자가 삭제합니다.</p>
+
+    <form  class="saveForm" id="board-Form" action="/save" method="post" enctype="multipart/form-data">
+     <input class="saveTitle" type="text" placeholder="제목"  style=" background: transparent;"  name="boardTitle" id="board-Title"><br>
+     <input  class="saveName" type="text" placeholder="닉네임" style=" background: transparent;" name="boardWriter" id="board-Writer">
+    <input class="savePass"  type="text" placeholder="비밀번호" style=" background: transparent;" name="boardPass" id="board-Pass"><br>
         <input class="saveFile" type="file" name="boardFile" multiple><br>
-    <textarea class="saveContents" name="boardContents" placeholder="내용을 입력해주세요." style=" background: transparent;" cols="30" rows="10"></textarea>
+    <textarea class="saveContents" name="boardContents" id="board-Contents" placeholder="내용을 입력해주세요." style=" background: transparent;" cols="30" rows="10"></textarea>
         <input class="saveSubmit" type="submit" value="작성">
 
 
@@ -61,4 +63,20 @@
     </div>
 
 </body>
+
+<script th:inline="javascript">
+    const form = document.getElementById('board-Form');
+    const title = document.getElementById('board-Title');
+    const writer = document.getElementById('board-Writer');
+    const pass = document.getElementById('board-Pass');
+    const content = document.getElementById('board-Contents');
+
+    form.addEventListener('submit', (e) => {
+        if (title.value.trim() === '' || content.value.trim() === ''|| writer.value.trim() === ''|| pass.value.trim() === '') {
+            e.preventDefault(); // 제출 막기
+            alert('모두 작성해주세요!');
+        }
+    });
+</script>
+
 </html>

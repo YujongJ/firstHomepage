@@ -97,6 +97,30 @@
   </div>
 
 
+  <!-- 댓글 목록 -->
+  <h3 style="margin-left: 400px; ">댓글</h3>
+  <div class="comment-list">
+    <table style="margin-left: 400px; width: 790px;" class="comment-table">
+      <tr th:each="comment : ${comments}">
+        <td style="width: 10%;" class="comment-writer" th:text="${comment.comment_writer}"></td>
+        <td class="comment-content" th:text="${comment.commentContent}"></td>
+        <td class="comment-date" th:text="${comment.commentCreatedAt}"></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 댓글 작성 폼 -->
+  <h3 style="margin-left: 400px;">댓글 작성</h3>
+  <div style="margin-left: 530px;" class="comment-form">
+    <input type="text" id="comment_writer" placeholder="작성자">
+    <textarea id="commentContent" placeholder="댓글을 입력하세요"></textarea>
+    <button onclick="addComment()">댓글 작성</button>
+  </div>
+
+
+
+
+
   <footer class="footer">
     <h3 class="contact"> CONTACT ME</h3>
     <div class="links">
@@ -113,9 +137,14 @@
 
 
 
-
-
 <script th:inline="javascript">
+
+
+  window.onload = function () {
+    fetchComments(); //  페이지가 로드될 때 자동으로 댓글 불러오기
+  };
+
+
   const listReq = () => {
       location.href = "/index";
   }
@@ -123,7 +152,108 @@
       location.href = `/update/[[${board.id}]]`;
   }
   const deleteReq = () => {
-      location.href = `/delete/[[${board.id}]]`;
+      const password = prompt("비밀번호를 입력해주세요!");
+      console.log(password);
+
+      const passDB = [[${board.boardPass}]];
+
+      if (password == passDB) {
+          location.href = `/delete/[[${board.id}]]`;
+      } else {
+          alert("비밀번호가 틀립니다!!");
+      }
+
   }
+
+  const fetchComments = () => {
+    let postId = [[${board.id}]];  // 게시글 ID 가져오기
+
+    if (!postId) {
+      console.error("게시글 ID가 없습니다.");
+      return; //  게시글이 없으면 fetch 실행 안 함
+    }
+
+    fetch(`/comments/${postId}`)
+            .then(response => response.json())
+            .then(comments => {
+              let commentTable = document.querySelector(".comment-table");
+              commentTable.innerHTML = ""; // 기존 댓글 목록 초기화
+
+              comments.forEach(comment => {
+                let row = `<tr class="comment-real">
+                    <td style="width: 70px;" class="comment-writer">${comment.comment_writer}</td>
+                    <td class="comment-content">${comment.commentContent}</td>
+                    <td class="comment-date">${comment.commentCreatedat}</td>
+                </tr>`;
+                commentTable.innerHTML += row;
+              });
+            })
+            .catch(error => console.error("Error loading comments:", error));
+  };
+
+
+
+
+
+
+
+
+
+  const addComment = () => {
+    let postId = [[${board.id}]];
+
+
+
+    let comment_writer = document.getElementById("comment_writer").value;
+    let commentContent = document.getElementById("commentContent").value;
+
+    //  입력값 검증
+    if (!comment_writer.trim()) {
+      alert("작성자를 입력하세요.");
+      return;
+    }
+    if (!commentContent.trim()) {
+      alert("댓글 내용을 입력하세요.");
+      return;
+    }
+
+    //  JSON 데이터 생성
+    let data = {
+      postId: postId,
+      comment_writer: comment_writer,
+      commentContent: commentContent
+    };
+
+    //  AJAX 요청 (fetch API 사용)
+    fetch("/comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+            .then(response => response.json())
+            .then(result => {
+              if (result.success) {
+                alert("댓글이 추가되었습니다.");
+                fetchComments(); //
+              } else {
+                alert("댓글 추가 실패");
+              }
+            })
+            .catch(error => {
+              console.error("Error:", error);
+              alert("오류가 발생했습니다.");
+            });
+  }
+
+
+
+
+
+
+
+
+
 </script>
 </html>

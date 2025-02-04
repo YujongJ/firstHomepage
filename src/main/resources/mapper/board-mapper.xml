@@ -33,14 +33,36 @@
         select * from board_file_table where boardId = #{id}
     </select>
 
-    <update id="resetVariable">
-        SET @new_order = 0;
-    </update>
 
-    <update id="reorderDisplayOrder">
+    <select id="getBoardList" resultType="Board">
+        SELECT
+            ROW_NUMBER() OVER (ORDER BY createdAt DESC) AS displayOrder,  -- 번호 매기기
+            id,
+            boardWriter,
+            boardPass,
+            boardTitle,
+            boardContents,
+            boardHits,
+            createdAt,
+            fileAttached
+        FROM board_table
+    </select>
 
-        UPDATE board_table
-        SET displayOrder = (@new_order := @new_order + 1)
-        ORDER BY id ASC;
-    </update>
+    <!-- 댓글 추가 -->
+    <insert id="insertComment" parameterType="map" useGeneratedKeys="true" keyProperty="commentId">
+        INSERT INTO comment (postId, commentContent, comment_writer)
+        VALUES (#{postId}, #{commentContent}, #{comment_writer})
+    </insert>
+
+    <!-- 특정 게시글의 댓글 목록 조회 -->
+    <select id="getCommentsByPostId" resultType="map">
+        SELECT commentId, postId, commentContent, commentCreatedat, comment_writer
+        FROM comment
+        WHERE postId = #{postId}
+        ORDER BY commentCreatedat DESC
+    </select>
+
+
 </mapper>
+
+

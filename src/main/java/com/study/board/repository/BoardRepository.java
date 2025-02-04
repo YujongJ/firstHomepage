@@ -36,11 +36,7 @@ public class BoardRepository {
     public void delete(Long id) {
         sql.delete("Board.delete", id);
     }
-    public void reorderDisplayOrder() {
-        sql.update("Board.resetVariable");
-        sql.update("Board.reorderDisplayOrder");
 
-    }
 
     public void saveFile(BoardFileDTO boardFileDTO) {
         sql.insert("Board.saveFile", boardFileDTO);
@@ -49,7 +45,6 @@ public class BoardRepository {
     public List<BoardFileDTO> findFile(Long id) {
         return sql.selectList("Board.findFile", id);
     }
-
 
 
 
