@@ -30,14 +30,14 @@ public class CommentController {
         return commentService.getComments(postId);
     }
 
-    // ✅ 댓글 삭제
+    // 댓글 삭제
     @DeleteMapping("/{commentId}")
     public Map<String, Object> deleteComment(@PathVariable Long commentId, @RequestBody Map<String, Object> payload) {
         boolean success = commentService.deleteComment(commentId, (String) payload.get("comment_password"));
         return Map.of("success", success);
     }
 
-    // ✅ 댓글 수정
+    // 댓글 수정
     @PutMapping("/{commentId}")
     public Map<String, Object> updateComment(@PathVariable Long commentId, @RequestBody Map<String, Object> payload) {
         boolean success = commentService.updateComment(commentId, (String) payload.get("comment_password"), (String) payload.get("commentContent"));
