@@ -85,36 +85,47 @@
     <td th:each="boardFile: ${boardFileList}">
       <img th:src="@{|/upload/${boardFile.storedFileName}|}" alt="" width="200" height="200">
     </td>
+
   </tr>
 </table>
 
 
 
   <div class="btn">
-  <button  onclick="listReq()">목록</button>
-  <button  onclick="updateReq()">수정</button>
-  <button onclick="deleteReq()">삭제</button>
+  <button class="combut1" onclick="listReq()">목록</button>
+  <button class="combut2" onclick="updateReq()">수정</button>
+  <button class="combut3" onclick="deleteReq()">삭제</button>
   </div>
 
 
   <!-- 댓글 목록 -->
-  <h3 style="margin-left: 400px; ">댓글</h3>
+  <h3 style="margin-left: 400px; margin-top: 100px " class="commentCom1">댓글</h3>
   <div class="comment-list">
     <table style="margin-left: 400px; width: 790px;" class="comment-table">
       <tr th:each="comment : ${comments}">
         <td style="width: 10%;" class="comment-writer" th:text="${comment.comment_writer}"></td>
         <td class="comment-content" th:text="${comment.commentContent}"></td>
         <td class="comment-date" th:text="${comment.commentCreatedAt}"></td>
+        <td>
+          <button onclick="editComment([[${comment.commentId}]])">수정</button>
+        </td>
+        <td>
+          <button onclick="deleteComment([[${comment.commentId}]])">삭제</button>
+        </td>
       </tr>
     </table>
   </div>
 
   <!-- 댓글 작성 폼 -->
-  <h3 style="margin-left: 400px;">댓글 작성</h3>
-  <div style="margin-left: 530px;" class="comment-form">
-    <input type="text" id="comment_writer" placeholder="작성자">
-    <textarea id="commentContent" placeholder="댓글을 입력하세요"></textarea>
-    <button onclick="addComment()">댓글 작성</button>
+  <h3 style="margin-left: 400px; margin-top: 200px; border-top: 2px solid gray; width: 790px; padding-top: 13px;"
+      class="commentCom2">댓글 작성</h3>
+
+
+  <div style="margin-left: 400px; margin-bottom: 200px; width: 790px; height: 170px;" class="comment-form">
+    <input class="comWriter" type="text" id="comment_writer" placeholder="작성자">
+    <input class="comPassword" type="password" id="comment_password" placeholder="비밀번호"><br>
+    <textarea class="comContent" id="commentContent" placeholder="댓글을 입력하세요"></textarea><br>
+    <button style="margin-left: 735px; margin-top: 3px;" onclick="addComment()">작성</button>
   </div>
 
 
@@ -143,6 +154,7 @@
   window.onload = function () {
     fetchComments(); //  페이지가 로드될 때 자동으로 댓글 불러오기
   };
+
 
 
   const listReq = () => {
@@ -180,10 +192,14 @@
               commentTable.innerHTML = ""; // 기존 댓글 목록 초기화
 
               comments.forEach(comment => {
-                let row = `<tr class="comment-real">
+                let row = `<tr  class="commentReal">
                     <td style="width: 70px;" class="comment-writer">${comment.comment_writer}</td>
-                    <td class="comment-content">${comment.commentContent}</td>
+                    <td style="width: 500px;" class="comment-content">${comment.commentContent}</td>
                     <td class="comment-date">${comment.commentCreatedat}</td>
+                    <td style="width: 48px;">
+                        <button class="update-btn" onclick="editComment(${comment.commentId})">수정</button>
+                        <button class="delete-btn" onclick="deleteComment(${comment.commentId})">삭제</button>
+                    </td>
                 </tr>`;
                 commentTable.innerHTML += row;
               });
@@ -206,10 +222,15 @@
 
     let comment_writer = document.getElementById("comment_writer").value;
     let commentContent = document.getElementById("commentContent").value;
+    let comment_password = document.getElementById("comment_password").value;
 
     //  입력값 검증
     if (!comment_writer.trim()) {
       alert("작성자를 입력하세요.");
+      return;
+    }
+    if (!comment_password.trim()) {
+      alert("비밀번호를 입력하세요.");
       return;
     }
     if (!commentContent.trim()) {
@@ -221,7 +242,8 @@
     let data = {
       postId: postId,
       comment_writer: comment_writer,
-      commentContent: commentContent
+      commentContent: commentContent,
+      comment_password: comment_password
     };
 
     //  AJAX 요청 (fetch API 사용)
@@ -248,6 +270,77 @@
   }
 
 
+
+
+
+  // 댓글 삭제 함수
+  const deleteComment = (commentId) => {
+    let password = prompt("비밀번호를 입력하세요:");
+
+    if (!password) {
+      alert("비밀번호를 입력해야 합니다.");
+      return;
+    }
+
+    fetch(`/comments/${commentId}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ comment_password: password })
+    })
+            .then(response => response.json())
+            .then(result => {
+              if (result.success) {
+                alert("댓글이 삭제되었습니다.");
+                fetchComments();
+              } else {
+                alert("비밀번호가 틀렸거나 삭제에 실패했습니다.");
+              }
+            })
+            .catch(error => {
+              console.error("Error:", error);
+              alert("오류가 발생했습니다.");
+            });
+  };
+
+
+
+
+  // 댓글 수정 함수
+  const editComment = (commentId) => {
+    let newContent = prompt("새로운 댓글 내용을 입력하세요:");
+    if (!newContent) {
+      alert("내용을 입력해야 합니다.");
+      return;
+    }
+
+    let password = prompt("비밀번호를 입력하세요:");
+    if (!password) {
+      alert("비밀번호를 입력해야 합니다.");
+      return;
+    }
+
+    fetch(`/comments/${commentId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        comment_password: password,
+        commentContent: newContent
+      })
+    })
+            .then(response => response.json())
+            .then(result => {
+              if (result.success) {
+                alert("댓글이 수정되었습니다.");
+                fetchComments();
+              } else {
+                alert("비밀번호가 틀렸거나 수정에 실패했습니다.");
+              }
+            })
+            .catch(error => {
+              console.error("Error:", error);
+              alert("오류가 발생했습니다.");
+            });
+  };
 
 
 

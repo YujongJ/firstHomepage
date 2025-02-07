@@ -1,13 +1,25 @@
 package com.study.board.controller;
 
+import com.study.board.dto.BoardDTO;
+import com.study.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
+
+    private final BoardService boardService;
+
     @GetMapping("/")
-    public String home() {
+    public String home(Model model) {
+        List<BoardDTO> top5Posts = boardService.findTop5();
+        System.out.println("HomeController에서 받은 데이터: " + top5Posts);
+        model.addAttribute("top5Posts", top5Posts);
         System.out.println("HomeController.home");
         return "home";
     }
@@ -61,6 +73,7 @@ public class HomeController {
         System.out.println("HomeController.project6");
         return "project6";
     }
+
 
 
 }

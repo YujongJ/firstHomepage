@@ -3,7 +3,7 @@ body{
 }
 
 .frame{
-    margin: 30px 150px;
+    margin: 0px 150px;
     display: flex;
     flex-direction: column;
 
@@ -14,9 +14,16 @@ body{
 /*navigator*/
 
 .navigator{
+    background-color: rgb(232, 232, 233);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    position: sticky;
+    top: 0px;
+    width:1580px;
+    height: 80px;
+    opacity: 0.7; backdrop-filter: blur(30px);
+
 
 }
 
@@ -25,19 +32,25 @@ li{
     align-self: center;
     margin: 0;
     margin-left: 15px;
+
+
 }
 
 ul{
     margin: 0;
+    padding-top: 30px;
 }
 
 .site-name{
+
     margin: 0;
     font-family: "Do Hyeon", sans-serif;
     font-weight: 300;
     font-style: normal;
     font-size:30px;
     color:rgb(0, 0, 0);
+    padding-top: 30px;
+
 }
 
 .nav-menu{
@@ -81,13 +94,13 @@ a:hover{
 }
 
 .recent-menu{
-  font-family: "Kanit", sans-serif;
-  font-weight: 700;
-  font-style: normal;
+    font-family:   "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:500;
+    font-style: normal;
+    font-size:20px;
+    margin-top: 80px;
 
-  display: inline;
-  align-self: flex-end;
-  margin-top: 200px;
 }
 
 .footer{
@@ -579,6 +592,8 @@ table.detail td.contentCell{
 height:400px;
 
 }
+
+
 
 .btn{
 margin-left:650px;
@@ -1378,5 +1393,90 @@ margin-right:50px;
         .download-button:hover {
             background-color: #0056b3;
         }
+
+
+.comment-form{
+
+    border: 2px solid black;
+
+}
+
+.comWriter{
+    background-color: transparent;
+    border: 2px solid black;
+    margin-top: 18px;
+    margin-left: 10px;
+    height: 25px;
+}
+
+.comPassword{
+    background-color: transparent;
+    border: 2px solid black;
+    height: 25px;
+}
+
+.comContent{
+    background-color: transparent;
+    border: 2px solid black;
+    height: 55px;
+    margin-top: 20px;
+    margin-left: 10px;
+    width: 762px;
+}
+
+.commentReal{
+    font-family:   "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:400;
+    font-style: normal;
+    font-size:13px;
+
+
+
+
+}
+
+.detail{
+    font-family:   "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:400;
+    font-style: normal;
+    font-size:13px;
+
+ }
+
+.commentCom1{
+    font-family:   "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:600;
+    font-style: normal;
+    font-size:23px;
+    border-top: 2px solid gray;
+    width: 790px;
+    padding-top: 13px;
+}
+
+.commentCom2{
+    font-family:   "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:600;
+    font-style: normal;
+    font-size:23px;
+}
+
+/* 최근 글 5개 표*/
+
+.top5board{
+    font-family:   "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:300;
+    font-style: normal;
+    font-size:15px;
+
+    border-top: 2px solid gray;
+    border-bottom: 2px solid gray;
+
+
+}
 
 

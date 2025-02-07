@@ -28,4 +28,16 @@ public class CommentService {
         List<Map<String, Object>> comments = boardDAO.getCommentsByPostId(postId);
         return (comments != null) ? comments : List.of(); // null 방지
     }
+
+    // ✅ 댓글 삭제
+    public boolean deleteComment(Long commentId, String commentPassword) {
+        int deletedRows = boardDAO.deleteCommentById(Map.of("commentId", commentId, "comment_password", commentPassword));
+        return deletedRows > 0;
+    }
+
+    // ✅ 댓글 수정
+    public boolean updateComment(Long commentId, String commentPassword, String newContent) {
+        int updatedRows = boardDAO.updateComment(Map.of("commentId", commentId, "comment_password", commentPassword, "commentContent", newContent));
+        return updatedRows > 0;
+    }
 }

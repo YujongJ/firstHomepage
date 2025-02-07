@@ -46,7 +46,9 @@ public class BoardRepository {
         return sql.selectList("Board.findFile", id);
     }
 
-
+    public List<BoardDTO> findTop5() {
+        return sql.selectList("Board.findTop5");
+    }
 
 
 }

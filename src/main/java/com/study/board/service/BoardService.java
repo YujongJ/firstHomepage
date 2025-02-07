@@ -42,8 +42,8 @@ public class BoardService {
                 boardFileDTO.setStoredFileName(storedFileName);
                 boardFileDTO.setBoardId(savedBoard.getId());
                 // 파일 저장용 폴더에 파일 저장 처리
-                String savePath = "C:/Users/Master/down/" + storedFileName; // mac
-//            String savePath = "C:/development/intellij_community/spring_upload_files/" + storedFileName;
+                String savePath = "C:/Users/Master/down/" + storedFileName;
+//
                 boardFile.transferTo(new File(savePath));
                 // board_file_table 저장 처리
                 boardRepository.saveFile(boardFileDTO);
@@ -70,14 +70,14 @@ public class BoardService {
     public void delete(Long id) {
         // 1. 게시글 삭제
         boardRepository.delete(id);
-
-
-
     }
-
 
     public List<BoardFileDTO> findFile(Long id) {
         return boardRepository.findFile(id);
+    }
+
+    public List<BoardDTO> findTop5() {
+        return boardRepository.findTop5();
     }
 
 }
