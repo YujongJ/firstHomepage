@@ -3,37 +3,55 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Board">
+
+    <!--주키{id}로 게시물 구분-->
+
+    <!--글작성-->
     <insert id="save" parameterType="board" useGeneratedKeys="true" keyProperty="id">
         insert into board_table(boardTitle, boardWriter, boardPass, boardContents, fileAttached)
         values(#{boardTitle}, #{boardWriter}, #{boardPass}, #{boardContents}, #{fileAttached})
     </insert>
+
+    <!--글작성-->
     <select id="findAll" resultType="board">
         select id, boardTitle, boardWriter, boardHits, date_format(createdAt, "%Y-%m-%d") as createdAt
         from board_table order by id desc
     </select>
+
+    <!--id로 들어오면 조회수 증가-->
     <update id="updateHits" parameterType="Long">
         update board_table set boardHits=boardHits+1 where id=#{id}
     </update>
+
+    <!--보드 변수를 model로 보여줄수 있게 셀렉트-->
     <select id="findById" parameterType="Long" resultType="board">
         select id, boardTitle, boardWriter, boardPass, boardContents, boardHits,
         date_format(createdAt, "%Y-%m-%d %H:%i:%s") as createdAt, fileAttached
         from board_table where id=#{id}
     </select>
+
+    <!--글 수정-->
     <update id="update">
         update board_table set boardTitle=#{boardTitle}, boardContents=#{boardContents} where id=#{id}
     </update>
+
+    <!--글 삭제-->
     <delete id="delete" parameterType="Long">
         delete from board_table where id=#{id}
     </delete>
+
+    <!--DTO 변수에 파일 추가-->
     <insert id="saveFile" parameterType="boardFile">
         insert into board_file_table(originalFileName, storedFileName, boardId)
         values (#{originalFileName}, #{storedFileName}, #{boardId})
     </insert>
+
+    <!--업로드 된 파일 선택-->
     <select id="findFile" parameterType="Long" resultType="boardFile">
         select * from board_file_table where boardId = #{id}
     </select>
 
-
+    <!--id 대신할 번호, 로우넘버 (미구현)-->
     <select id="getBoardList" resultType="Board">
         SELECT
             ROW_NUMBER() OVER (ORDER BY createdAt DESC) AS displayOrder,  -- 번호 매기기
@@ -81,6 +99,20 @@
         FROM board_table
         ORDER BY createdAt DESC
         LIMIT 5
+    </select>
+
+    <!-- 페이징 처리-->
+    <select id="findAllWithPaging" resultType="board">
+        SELECT id, boardTitle, boardWriter, boardHits,
+               DATE_FORMAT(createdAt, "%Y-%m-%d") as createdAt
+        FROM board_table
+        ORDER BY id DESC
+            LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <!-- 전체 테이블 크기 확인-->
+    <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*) FROM board_table
     </select>
 
 

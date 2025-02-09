@@ -80,4 +80,14 @@ public class BoardService {
         return boardRepository.findTop5();
     }
 
+    public List<BoardDTO> findAllWithPaging(int page, int pageSize) {
+        int offset = (page - 1) * pageSize; // 페이지 번호를 OFFSET으로 변환
+        return boardRepository.findAllWithPaging(offset, pageSize);
+    }
+
+    public int getTotalPages(int pageSize) {
+        int totalCount = boardRepository.getTotalCount();
+        return (int) Math.ceil((double) totalCount / pageSize); // 총 페이지 수 계산
+    }
+
 }

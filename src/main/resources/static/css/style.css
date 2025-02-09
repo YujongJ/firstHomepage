@@ -573,7 +573,7 @@ table.detail th.wrtCell{
 width:8%
 }
 table.detail td.writerCell{
-width:10%
+width:100px;
 
 }
 table.detail td.createCell{
@@ -1479,4 +1479,17 @@ margin-right:50px;
 
 }
 
+.paging{
+
+    margin-left: 740px;
+
+    font-family:   "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:600;
+    font-style: normal;
+    font-size:15px;
+
+
+
+}
 

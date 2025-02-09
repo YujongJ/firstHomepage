@@ -12,11 +12,13 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class Comment {
-    private Long commentId;        // 댓글 ID
-    private Long postId;           // 댓글이 속한 게시글 ID
+    private Long commentId;
+    private Long postId;
     private String commentContent;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")// 댓글 내용
-    private LocalDateTime commentCreatedAt; // 댓글 작성 시간
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")// Json 리스트 사용 시 날짜 시간 포멧 변경(미구현)
+    private LocalDateTime commentCreatedAt;
+
     private String comment_writer;
     private String comment_password;
 }

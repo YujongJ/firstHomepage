@@ -6,10 +6,7 @@ import com.study.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,6 +21,7 @@ public class BoardController {
         return "save";
     }
 
+
     @PostMapping("/save")
     public String save(BoardDTO boardDTO) throws IOException {
         System.out.println("boardDTO = " + boardDTO);
@@ -31,15 +29,9 @@ public class BoardController {
         return "redirect:/index";
     }
 
-    @GetMapping("/index")
-    public String findAll(Model model) {
-        List<BoardDTO> boardDTOList = boardService.findAll();
-        model.addAttribute("boardList", boardDTOList);
-        System.out.println("boardDTOList = " + boardDTOList);
-        return "index";
-    }
 
-    // /10, /1
+
+
     @GetMapping("/{id}")
     public String findById(@PathVariable("id") Long id, Model model) {
         // 조회수 처리
@@ -65,6 +57,7 @@ public class BoardController {
     @PostMapping("/update/{id}")
     public String update(BoardDTO boardDTO, Model model) {
         boardService.update(boardDTO);
+        //수정된 getId
         BoardDTO dto = boardService.findById(boardDTO.getId());
         model.addAttribute("board", dto);
         return "detail";
@@ -75,6 +68,24 @@ public class BoardController {
         boardService.delete(id);
         return "redirect:/index";
     }
+
+
+
+
+    // 페이징 처리가 추가된 새로운 게시판 리스트
+    @GetMapping("/index")
+    public String findAll(@RequestParam(defaultValue = "1") int page, Model model) {
+        int pageSize = 10; // 한 페이지당 10개 게시글
+        List<BoardDTO> boardDTOList = boardService.findAllWithPaging(page, pageSize);
+        int totalPages = boardService.getTotalPages(pageSize);
+
+        model.addAttribute("boardList", boardDTOList);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+
+        return "index";
+    }
+
 
 
 

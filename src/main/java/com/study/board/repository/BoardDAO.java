@@ -27,11 +27,12 @@ public class BoardDAO {
         return sqlSession.selectList("Board.getCommentsByPostId", postId);
     }
 
-
+    //댓글 삭제
     public int deleteCommentById(Map<String,? extends Serializable> commentId) {
         return sqlSession.delete("Board.deleteCommentById", commentId);
     }
 
+    //댓글 수정
     public int updateComment(Map<String,? extends Serializable> commentId) {
         return sqlSession.update("Board.updateComment", commentId);
     }

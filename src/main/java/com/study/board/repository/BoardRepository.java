@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @RequiredArgsConstructor
@@ -50,5 +52,15 @@ public class BoardRepository {
         return sql.selectList("Board.findTop5");
     }
 
+    public List<BoardDTO> findAllWithPaging(int offset, int pageSize) {
+        Map<String, Integer> params = new HashMap<>();
+        params.put("offset", offset);
+        params.put("pageSize", pageSize);
+        return sql.selectList("Board.findAllWithPaging", params);
+    }
+
+    public int getTotalCount() {
+        return sql.selectOne("Board.getTotalCount");
+    }
 
 }

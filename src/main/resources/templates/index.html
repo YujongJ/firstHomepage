@@ -60,6 +60,18 @@
         </tbody>
     </table>
 
+    <div class="paging">
+        <!-- 이전 버튼 (1페이지가 아닐 때만 표시) -->
+        <a th:if="${currentPage > 1}" th:href="@{/index(page=${currentPage - 1})}">◀</a>
+
+        <!-- 현재 페이지 표시 -->
+        <span style="margin-left: 10px; margin-right: 10px;" th:text="${currentPage}"></span>
+
+        <!-- 다음 버튼 (마지막 페이지가 아닐 때만 표시) -->
+        <a th:if="${currentPage < totalPages}" th:href="@{/index(page=${currentPage + 1})}">
+            ▶</a>
+    </div>
+
 
 
 

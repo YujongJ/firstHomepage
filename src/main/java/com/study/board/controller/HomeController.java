@@ -15,6 +15,7 @@ public class HomeController {
 
     private final BoardService boardService;
 
+    //홈화면에 있는 상위 5개 리스트 추가
     @GetMapping("/")
     public String home(Model model) {
         List<BoardDTO> top5Posts = boardService.findTop5();
@@ -25,7 +26,7 @@ public class HomeController {
     }
 
 
-
+    //네비게이터, work에 있는 프로젝트들
     @GetMapping("/info")
     public String info() {
         System.out.println("HomeController.info");
