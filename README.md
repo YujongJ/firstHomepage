@@ -1,6 +1,6 @@
 
 
-# 0. Getting Started (시작하기)
+# 0. 호스팅 중인 사이트 (시작하기)
 [홈페이지 링크](http://localhost:8080/)
 
 <br/>
