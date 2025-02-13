@@ -1,4 +1,72 @@
-# MySQL
+<a href="https://club-project-one.vercel.app/" target="_blank">
+<img src="https://github.com/user-attachments/assets/daa622b9-7c69-4786-8db3-4996b7f140be" alt="배너" width="100%"/>
+</a>
+
+<br/>
+<br/>
+
+# 0. Getting Started (시작하기)
+[서비스 링크](http://localhost:8080/)
+
+<br/>
+<br/>
+
+# 1. Project Overview (프로젝트 개요)
+- 프로젝트 이름: 개인 홈페이지 + CRUD BOARD
+- 프로젝트 설명: 개인 홈페이지에 
+
+<br/>
+<br/>
+
+
+# 3. Key Features (주요 기능)
+- **CRUD 기능**:
+  - 기본적인 글 생성, 수정, 삭제, 읽기 기능.
+  - 데이터베이스에 저장된 패스워드로 수정 삭제 가능
+
+- **댓글 기능**:
+  - Json/Ajax를 이용한 댓글 기능
+  - 데이터베이스에 저장된 패스워드로 수정 삭제 가능
+
+- **페이징 기능**:
+  - 글 리스트 최대 10개 페이징 처리
+
+- **최신글 5개 홈화면 출력**:
+  - CreatedAt을 기준으로 최신 글 5개 홈화면 출력
+
+- **동아리 홍보**:
+  - 홍보글 등록을 통해 동아리를 홍보할 수 있습니다.
+
+- **동아리 만들기**:
+  - 새로운 동아리를 만들어 관리할 수 있습니다.
+
+- **동아리 프로필**:
+  - 동아리 홍보글에서 동아리 이름(링크)를 클릭하면 해당 동아리 프로필로 이동합니다.
+  - 동아리 프로필에서는 동아리 소개, 동아리 활동사진 갤러리, 동아리 홍보글 기록관 등을 볼 수 있습니다.
+
+<br/>
+<br/>
+
+
+
+# 5. Technology Stack (기술 스택)
+
+|  |  |
+|-----------------|-----------------|
+| HTML    |<img src="https://github.com/user-attachments/assets/2e122e74-a28b-4ce7-aff6-382959216d31" alt="HTML5" width="100">| 
+| CSS3   |   <img src="https://github.com/user-attachments/assets/c531b03d-55a3-40bf-9195-9ff8c4688f13" alt="CSS3" width="100">|
+| Javascript    |  <img src="https://github.com/user-attachments/assets/4a7d7074-8c71-48b4-8652-7431477669d1" alt="Javascript" width="100"> | 
+| Git    |  <img src="https://github.com/user-attachments/assets/483abc38-ed4d-487c-b43a-3963b33430e6" alt="git" width="100">    |
+<br/>
+
+
+
+
+
+<br/>
+
+
+# 6.MySQL
 
 
 -- board_table
