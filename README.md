@@ -58,40 +58,40 @@
 # 6.MySQL
 
 
--- board_table
- drop table if exists board_table;
- create table board_table
- (
-	id bigint primary key auto_increment,
-    boardTitle varchar(50),
-    boardWriter varchar(20),
-    boardPass varchar(20),
-    boardContents varchar(500),
-    boardHits int default 0,
-    createdAt datetime default now(), 
-    fileAttached int default 0
-);
+-- board_table<br/>
+ drop table if exists board_table;<br/>
+ create table board_table<br/>
+ (<br/>
+	id bigint primary key auto_increment,<br/>
+    boardTitle varchar(50),<br/>
+    boardWriter varchar(20),<br/>
+    boardPass varchar(20),<br/>
+    boardContents varchar(500),<br/>
+    boardHits int default 0,<br/>
+    createdAt datetime default now(), <br/>
+    fileAttached int default 0<br/>
+);<br/><br/>
 
 
 
--- board_file_table
-drop table if exists board_file_table;
-create table board_file_table
-(
-    id	bigint auto_increment primary key,
-    originalFileName varchar(100),
-    storedFileName varchar(100),
-    boardId bigint,
-    constraint fk_board_file foreign key(boardId) references board_table(id) on delete cascade
-);
+-- board_file_table<br/>
+drop table if exists board_file_table;<br/>
+create table board_file_table<br/>
+(<br/>
+    id	bigint auto_increment primary key,<br/>
+    originalFileName varchar(100),<br/>
+    storedFileName varchar(100),<br/>
+    boardId bigint,<br/>
+    constraint fk_board_file foreign key(boardId) references board_table(id) on delete cascade<br/>
+);<br/><br/>
 
 
---comment
-CREATE TABLE comment (
-    commentId BIGINT AUTO_INCREMENT PRIMARY KEY,  
-	postId BIGINT NOT NULL,
-    commentContent TEXT NOT NULL,                 
-    commentCreatedat TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
-    comment_writer varchar(100),
-    FOREIGN KEY (postId) REFERENCES board_table(id) ON DELETE CASCADE 
-);
+--comment<br/>
+CREATE TABLE comment (<br/>
+    commentId BIGINT AUTO_INCREMENT PRIMARY KEY,  <br/>
+	postId BIGINT NOT NULL,<br/>
+    commentContent TEXT NOT NULL,         <br/>        
+    commentCreatedat TIMESTAMP DEFAULT CURRENT_TIMESTAMP, <br/>
+    comment_writer varchar(100),<br/>
+    FOREIGN KEY (postId) REFERENCES board_table(id) ON DELETE CASCADE <br/>
+);<br/>
