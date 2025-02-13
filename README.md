@@ -39,20 +39,22 @@
 
 
 # 5. Technology Stack (기술 스택)
-
+## 5.1 BackEnd
 |  |  |
 |-----------------|-----------------|
-| JAVA    |  <img src="https://github.com/user-attachments/assets/0511f24d-1dc5-4685-bdac-9673cdecfa07" alt="git" width="100">    |
-| Git    |  <img src="https://github.com/user-attachments/assets/483abc38-ed4d-487c-b43a-3963b33430e6" alt="git" width="100">    |
-| Git    |  <img src="https://github.com/user-attachments/assets/483abc38-ed4d-487c-b43a-3963b33430e6" alt="git" width="100">    |
-| Git    |  <img src="https://github.com/user-attachments/assets/483abc38-ed4d-487c-b43a-3963b33430e6" alt="git" width="100">    |
-| Git    |  <img src="https://github.com/user-attachments/assets/483abc38-ed4d-487c-b43a-3963b33430e6" alt="git" width="100">    |
-| Git    |  <img src="https://github.com/user-attachments/assets/483abc38-ed4d-487c-b43a-3963b33430e6" alt="git" width="100">    |
-| Git    |  <img src="https://github.com/user-attachments/assets/483abc38-ed4d-487c-b43a-3963b33430e6" alt="git" width="100">    |
-| Git    |  <img src="https://github.com/user-attachments/assets/483abc38-ed4d-487c-b43a-3963b33430e6" alt="git" width="100">    |
+| JAVA    |  <img src="https://github.com/user-attachments/assets/c39f5ffd-6fdf-42a6-862b-e12b3f3d4ac8" alt="git" width="100">    |
+| SPRING BOOT    |  <img src="(https://github.com/user-attachments/assets/0511f24d-1dc5-4685-bdac-9673cdecfa07" alt="git" width="100">    |
+| MyBatis    |  <img src="https://github.com/user-attachments/assets/6d90a6b5-ce72-40be-8c83-b38c52336920" alt="git" width="100">    |
+
+## 5.2 DataBase
+| MySQL    |  <img src="[https://github.com/user-attachments/assets/483abc38-ed4d-487c-b43a-3963b33430e6](https://github.com/user-attachments/assets/e9329ff4-1290-479f-baf9-de1dc7fe103a)" alt="git" width="100">    |
+
+## 5.3 FrontEnd
 | HTML    |<img src="https://github.com/user-attachments/assets/2e122e74-a28b-4ce7-aff6-382959216d31" alt="HTML5" width="100">| 
 | CSS3   |   <img src="https://github.com/user-attachments/assets/c531b03d-55a3-40bf-9195-9ff8c4688f13" alt="CSS3" width="100">|
 | Javascript    |  <img src="https://github.com/user-attachments/assets/4a7d7074-8c71-48b4-8652-7431477669d1" alt="Javascript" width="100"> | 
+
+##5.4 Configuration
 | Git    |  <img src="https://github.com/user-attachments/assets/483abc38-ed4d-487c-b43a-3963b33430e6" alt="git" width="100">    |
 <br/>
 
